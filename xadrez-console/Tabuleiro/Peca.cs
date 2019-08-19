@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Enuns;
 using tabuleiro;
 
 namespace tabuleiro
@@ -17,12 +16,12 @@ namespace tabuleiro
         {
         }
 
-        public Peca(Posicao posicao, Cor cor, Tabuleiro tabuleiro)
+        public Peca(Cor cor, Tabuleiro tabuleiro)
         {
-            Posicao = posicao;
+            Posicao = null;
             Cor = cor;
             QntMovimento = 0;
             Tabuleiro = tabuleiro;
-        }
+        }      
     }
 }
