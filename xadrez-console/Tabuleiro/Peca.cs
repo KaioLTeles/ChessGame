@@ -22,6 +22,11 @@ namespace tabuleiro
             Cor = cor;
             QntMovimento = 0;
             Tabuleiro = tabuleiro;
-        }      
+        }   
+        
+        public void incrementarQntDeMovimentos()
+        {
+            QntMovimento++;
+        }
     }
 }
