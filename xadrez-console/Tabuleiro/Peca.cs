@@ -49,11 +49,11 @@ namespace tabuleiro
             return false;
         }
 
-        public bool podeMoverPara(Posicao pos)
+        public bool movimentoPossivel(Posicao pos)
         {
             var matriz = movimentosPossiveis();
 
-            return matriz[pos.Linha, pos.Coluna]; 
+            return matriz[pos.Linha, pos.Coluna];   
         }
 
         public abstract bool[,] movimentosPossiveis();

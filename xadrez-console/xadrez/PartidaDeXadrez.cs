@@ -96,7 +96,7 @@ namespace xadrez
 
         public void validarPosicaoDestino(Posicao origem, Posicao destino)
         {
-            if (!Tab.peca(origem).podeMoverPara(destino))
+            if (!Tab.peca(origem).movimentoPossivel(destino))
             {
                 throw new TabuleiroException("Posição de destido inválida!");
             }
@@ -169,7 +169,8 @@ namespace xadrez
 
         public bool estaEmXeque(Cor cor)
         {
-            Peca R = rei(cor);
+            Peca aux = rei(cor);
+            Peca R = aux;
             if(R == null)
             {
                 throw new TabuleiroException("Não existe rei da cor " + cor + " no tabuleiro!");
