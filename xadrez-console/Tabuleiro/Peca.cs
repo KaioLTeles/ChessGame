@@ -27,6 +27,10 @@ namespace tabuleiro
         {
             QntMovimento++;
         }
+        public void decrementarMovimentos()
+        {
+            QntMovimento--;
+        }
 
         public bool existeMovimentosPossiveis()
         {
@@ -47,7 +51,9 @@ namespace tabuleiro
 
         public bool podeMoverPara(Posicao pos)
         {
-            return movimentosPossiveis()[pos.Linha, pos.Coluna]; //Não entendi direito  oq rolou aqui tirar dúvida com o pessoal do trabalho
+            var matriz = movimentosPossiveis();
+
+            return matriz[pos.Linha, pos.Coluna]; 
         }
 
         public abstract bool[,] movimentosPossiveis();
