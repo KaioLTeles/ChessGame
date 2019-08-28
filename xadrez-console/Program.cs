@@ -37,28 +37,32 @@ namespace xadrez_console
 
                         partida.realizaJogada(origem, destino);
                     }
-                    catch(TabuleiroException e)
+                    catch (TabuleiroException e)
                     {
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
-                    
+
                 }
+                Console.Clear();
+                Tela.imprimirPartida(partida);
             }
-            catch(TabuleiroException e)
+
+            catch (TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
-            catch(Exception e){
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message);
             }
-            
-            
+
+
         }
     }
 }

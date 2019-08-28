@@ -13,11 +13,20 @@ namespace xadrez_console
             Console.WriteLine();
             imprimmirPecasCapturadas(partida);
             Console.WriteLine("Turno: " + partida.Turno);
-            Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
-            if (partida.Xeque)
+            if (!partida.Terminada)
             {
-                Console.WriteLine("VOCÊ ESTÁ EM XEQUE!");
+                Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
+                if (partida.Xeque)
+                {
+                    Console.WriteLine("VOCÊ ESTÁ EM XEQUE!");
+                }
             }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine("Vencedor: " + partida.JogadorAtual);
+            }
+
         }
 
         public static void imprimmirPecasCapturadas(PartidaDeXadrez partida)
@@ -37,7 +46,7 @@ namespace xadrez_console
         public static void imprimirConjunto(HashSet<Peca> conjunto)
         {
             Console.Write("[");
-            foreach(Peca x in conjunto)
+            foreach (Peca x in conjunto)
             {
                 Console.Write(x + "");
             }
@@ -46,7 +55,7 @@ namespace xadrez_console
 
         public static void imprimirTabulerio(Tabuleiro tab)
         {
-            for(int i = 0; i < tab.Linhas; i++)
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < tab.Colunas; j++)
@@ -73,7 +82,7 @@ namespace xadrez_console
                     }
                     else
                     {
-                        Console.BackgroundColor = fundoOriginal;                        
+                        Console.BackgroundColor = fundoOriginal;
                     }
                     imprimirPeca(tab.peca(i, j));
                     Console.BackgroundColor = fundoOriginal;
@@ -91,7 +100,7 @@ namespace xadrez_console
             char coluna = s[0];
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha);
-        }    
+        }
 
         public static void imprimirPeca(Peca peca)
         {
