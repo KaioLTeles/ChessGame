@@ -4,9 +4,10 @@ namespace xadrez
 {
     class Peao : Peca
     {
-        public Peao(Cor cor, Tabuleiro tab) : base(cor, tab)
+        private PartidaDeXadrez Partida;
+        public Peao(Cor cor, Tabuleiro tab, PartidaDeXadrez partida) : base(cor, tab)
         {
-
+            Partida = partida;
         }
 
         public override string ToString()
@@ -45,7 +46,9 @@ namespace xadrez
                 }
 
                 pos.definirValores(Posicao.Linha - 2, Posicao.Coluna);
-                if (Tabuleiro.posicaoValida(pos) && livre(pos) && QntMovimento == 0)
+                Posicao posAux = new Posicao(0, 0);
+                posAux.definirValores(Posicao.Linha - 1, Posicao.Coluna);
+                if (Tabuleiro.posicaoValida(pos) && livre(posAux) && livre(pos) && QntMovimento == 0)
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
@@ -60,6 +63,22 @@ namespace xadrez
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
+
+                //#JOGADA ESPECIAL - EN PASSANT BRANCOS
+                if(Posicao.Linha == 3)
+                {
+                    Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                    if(Tabuleiro.posicaoValida(esquerda) && existeInimigo(esquerda) && Tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
+                    {
+                        mat[esquerda.Linha - 1, esquerda.Coluna] = true;
+                    }
+
+                    Posicao diretia = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                    if (Tabuleiro.posicaoValida(diretia) && existeInimigo(diretia) && Tabuleiro.peca(diretia) == Partida.VulneravelEnPassant)
+                    {
+                        mat[diretia.Linha -1, diretia.Coluna] = true;
+                    }
+                }
             }
             else
             {
@@ -70,7 +89,9 @@ namespace xadrez
                 }
 
                 pos.definirValores(Posicao.Linha + 2, Posicao.Coluna);
-                if (Tabuleiro.posicaoValida(pos) && livre(pos) && QntMovimento == 0)
+                Posicao posAux = new Posicao(0, 0);
+                posAux.definirValores(Posicao.Linha + 1, Posicao.Coluna);
+                if (Tabuleiro.posicaoValida(pos) && livre(posAux) && livre(pos) && QntMovimento == 0)
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
@@ -84,6 +105,22 @@ namespace xadrez
                 if (Tabuleiro.posicaoValida(pos) && existeInimigo(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
+                }
+
+                //#JOGADA ESPECIAL - EN PASSANT PRETAS  
+                if (Posicao.Linha == 4)
+                {
+                    Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                    if (Tabuleiro.posicaoValida(esquerda) && existeInimigo(esquerda) && Tabuleiro.peca(esquerda) == Partida.VulneravelEnPassant)
+                    {
+                        mat[esquerda.Linha + 1, esquerda.Coluna] = true;
+                    }
+
+                    Posicao diretia = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                    if (Tabuleiro.posicaoValida(diretia) && existeInimigo(diretia) && Tabuleiro.peca(diretia) == Partida.VulneravelEnPassant)
+                    {
+                        mat[diretia.Linha + 1, diretia.Coluna] = true;
+                    }
                 }
             }
 
